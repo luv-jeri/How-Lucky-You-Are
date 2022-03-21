@@ -1,64 +1,63 @@
-let luckyNumber = Math.floor(Math.random() * 20); // Generates a random number between 0 and 19
+// Generate a random number between 1 and 50
+const randomNumber = Math.random() * 50 + 1;
 
-let score = 20;
-let highScore = 0;
-
-let scoreEl = document.querySelector('.score');
-const message = document.querySelector('.message');
-let highScoreEl = document.querySelector('.highscore');
-let guessEl = document.querySelector('.guess');
-let body = document.querySelector('body');
-
-scoreEl.innerHTML = score;
-highScoreEl.innerHTML = highScore;
-
+const luckyNumber = Math.floor(randomNumber);
+let score = 10;
 console.log(luckyNumber);
+//  ------------------------------------------------------------------------------
 
-const onClick = function () {
-  const userInput = guessEl.value;
+// Take input from the user
+const userInputFiled =
+  document.getElementById('user-input');
+// grab the button, which is going to call the function to check the number
+const checkButton =
+  document.getElementById('check');
+// grab the message to show the result
+const message =
+  document.getElementsByClassName('message')[0];
 
-  if (luckyNumber == userInput) {
-    message.innerHTML = 'You guessed the correct number!';
+const scoreCard =
+  document.getElementsByClassName('score')[0];
+scoreCard.textContent = score; // Set the score for the first time
+const container =
+  document.getElementsByTagName('main')[0];
+const emogieBox =
+  document.getElementById('emogie');
 
-    body.style = 'background-color: #219F94';
-    if (score > highScore) {
-      highScore = score;
-      highScoreEl.innerHTML = highScore;
-    }
+// Function to check the number
+const checkNumber = () => {
+  const userNumber = userInputFiled.value;
+
+  if (userNumber > 50 || userNumber < 1) {
+    message.textContent =
+      'Please enter a number between 1 and 50';
+    return;
+  }
+
+  if (userNumber == luckyNumber) {
+    message.textContent = 'You are correct!';
+    container.style.backgroundColor = '#2EB086';
+    emogieBox.textContent = '😁';
   } else {
-    score--;
-
-    scoreEl.innerHTML = score;
-
-    if (score == 0) {
-      document.querySelector('#idtitle').innerHTML =
-        'You have lost try again!';
-      body.style = 'background-color: #E84855';
+    // if the number is not correct, show the message too low or too high
+    if (luckyNumber < userNumber) {
+      message.textContent = 'Too high!';
+      score = score - 1;
+      scoreCard.textContent = score; // update the score and show it
+      container.style.backgroundColor = '#D82148';
     }
 
-    if (userInput < luckyNumber) {
-      message.innerHTML = 'Too low!';
-      message.style = 'color: #B8405E';
-    }
-    if (userInput > luckyNumber) {
-      message.style = 'color: #B8405E';
-      message.innerHTML = 'Too high!';
+    if (luckyNumber > userNumber) {
+      message.textContent = 'Too low!';
+      score = score - 1;
+      scoreCard.textContent = score; // update the score and show it
+      container.style.backgroundColor = '#D82148';
     }
   }
 };
 
-document.querySelector('#check').addEventListener('click', onClick);
-
-document
-  .querySelector('#again')
-  .addEventListener('click', function () {
-    document.querySelector('#idtitle').innerHTML =
-      'How lucky are you?';
-    luckyNumber = Math.floor(Math.random() * 20);
-    console.log(luckyNumber);
-    score = 20;
-    scoreEl.innerHTML = score;
-    message.innerHTML = 'Start guessing!';
-    guessEl.value = 0;
-    document.querySelector('body').style = 'background-color: #222';
-  });
+// Set up the event listener for the button click
+checkButton.addEventListener(
+  'click',
+  checkNumber
+);
