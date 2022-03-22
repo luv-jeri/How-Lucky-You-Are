@@ -20,7 +20,15 @@ const resetGame = () => {
 let luckyNumber = generateRandomNumber(50);
 let score = 10;
 
-let highScore = 0;
+let highScore = localStorage.getItem('highScore');
+
+if (
+  highScore === null ||
+  highScore === '' ||
+  highScore === undefined
+) {
+  highScore = 0;
+}
 
 console.log(luckyNumber);
 //  ------------------------------------------------------------------------------
@@ -63,6 +71,10 @@ const checkNumber = () => {
     if (highScore < score) {
       highScore = score; // Set the high score equal to the score
       highScoreCard.textContent = highScore; // show the high score in the card
+      localStorage.setItem(
+        'highScore',
+        highScore
+      ); // save the high score to local storage
     }
   } else {
     // if the number is not correct, show the message too low or too high
@@ -79,6 +91,13 @@ const checkNumber = () => {
       scoreCard.textContent = score; // update the score and show it
       container.style.backgroundColor = '#D82148';
     }
+  }
+
+  if (score == 0) {
+    message.textContent = 'Game over';
+    emojiBox.textContent = '🤕';
+    resetButton.style.display = 'block';
+    return;
   }
 };
 
