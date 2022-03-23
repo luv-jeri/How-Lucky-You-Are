@@ -8,3 +8,26 @@
 
 // console.log('I', i);
 // console.log('J', j);
+
+// do {
+//   console.log('Loop');
+// } while (false);
+
+// const table = (num) => {
+//   let i = 0;
+
+//   while (i <= 10) {
+//     console.log(i * num);
+//     i++;
+//   }
+// };
+
+// table(20356236);
+// table(46);
+// table(345);
+
+// const arr = ['a', 'b'];
+
+// for (let i = 0; i < arr.length; i++) {
+//   console.log(arr[i]);
+// }
