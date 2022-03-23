@@ -31,3 +31,9 @@
 // for (let i = 0; i < arr.length; i++) {
 //   console.log(arr[i]);
 // }
+
+// for (let i = 0; i < 100; i = i + 5) {
+//   if (i % 2 === 0) {
+//     console.log(i);
+//   }
+// }
