@@ -94,3 +94,11 @@ get();
 //   console.log('Something went wrong 🥲🥲');
 //   console.log(err);
 // }
+
+//  const data_split = data_.reduce((acc, curr, index) => {
+//    if (index % 3 === 0) {
+//      acc.push([]);
+//    }
+//    acc[acc.length - 1].push(curr);
+//    return acc;
+//  }, []);
